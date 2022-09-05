@@ -1,0 +1,9 @@
+
+numpy==1.16.0
+opencv-python
+Cython
+numba
+progress
+matplotlib
+easydict
+scipy
