@@ -5,7 +5,7 @@ a compact and powerful single-stage multi-person pose estimation framework:
 > Yabo Xiao, Dongdong Yu, Xiaojuan Wang, Guoli Wang, Qian Zhang, Mingshu He;        
 > *Published on AAAI2022*   
 > AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression            
-> Yabo Xiao, Xiaojuan Wang, Dongdong Yu, Lei Jin, Mei Song, Shuicheng Yan, Jian Zhao;      
+> Yabo Xiao, Xiaojuan Wang, Dongdong Yu, Kai Su, Lei Jin, Mei Song, Shuicheng Yan, Jian Zhao;      
 > *Submitted to TCSVT*   
       
 
@@ -112,7 +112,7 @@ AdaptivePose is built upon the codebase of CenterNet. If you are interested in t
 ## Citation
 
 If you find this project useful for your research, please use the following BibTeX entry.
-
+```
   @inproceedings{xiao2022adaptivepose,
   title={Adaptivepose: Human parts as adaptive points},
   author={Xiao, Yabo and Wang, Xiao Juan and Yu, Dongdong and Wang, Guoli and Zhang, Qian and Mingshu, HE},
@@ -122,3 +122,4 @@ If you find this project useful for your research, please use the following BibT
   pages={2813--2821},
   year={2022}
 }
+```
