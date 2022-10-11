@@ -4,7 +4,7 @@ a compact and powerful single-stage multi-person pose estimation framework:
 > [**AdaptivePose: Human Parts as Adaptive Points**](https://arxiv.org/abs/2112.13635),            
 > Yabo Xiao, Dongdong Yu, Xiaojuan Wang, Guoli Wang, Qian Zhang, Mingshu He;        
 > *Published on AAAI2022*   
-> AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression            
+> [**AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression**](https://arxiv.org/abs/2210.04014)      
 > Yabo Xiao, Xiaojuan Wang, Dongdong Yu, Kai Su, Lei Jin, Mei Song, Shuicheng Yan, Jian Zhao;      
 > *Submitted to TCSVT*   
       
@@ -34,15 +34,15 @@ Multi-person pose estimation generally follows top-down and bottom-up paradigms.
 
 ### The single-stage multi-person pose estimation on COCO validation
 <!-- - **Speed** Please refer to the paper(https://arxiv.org/abs/2112.13635) for inference time. The performance is slightly better than the reported in paper. -->
-<!-- The time is calculated on a single Tesla V100 -->
+The time is calculated on a single Tesla V100, which is more faster than the speed reported in paper
 We found that stacking more 3*3 conv-relu in each brach can further improve the performance
 
-| Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  |
-|--------------|---------|-----------|--------------|-------------------|   ---    |
-|DLA-34        |   512   |   65.8    |   66.2       | 68.8    | [model](https://drive.google.com/file/d/110MSVGZWYF8clzWPW_5zgW47BzI7w-2M/view?usp=sharing)  |
-|DLA-34        |   640   |    67.2   |     67.7     | 69.3        |  [model](https://drive.google.com/file/d/1F1riIzzaeh_gh7ASOfaNPnvB3m5lM_-o/view?usp=sharing)|
-|HRNet-W48     |   640   |    70.5   |     71.0     |  72.6 |   [model](https://drive.google.com/file/d/1pLg8B1ut4VS7HnjzLadfm0tJIa2IxzMR/view?usp=sharing)  |
-|HRNet-W48     |   800   |    70.8   |     71.5     |        72.5    | [model](https://drive.google.com/file/d/1Z8WrO9k3gRX48goRSegaav8mSrTjjz64/view?usp=sharing)|   
+| Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  | time/ms|
+|--------------|---------|-----------|--------------|-------------------|   ---    |  
+|DLA-34        |   512   |   65.8    |   66.2       | 68.8    | [model](https://drive.google.com/file/d/110MSVGZWYF8clzWPW_5zgW47BzI7w-2M/view?usp=sharing)  | 33|
+|DLA-34        |   640   |    67.2   |     67.7     | 69.3        |  [model](https://drive.google.com/file/d/1F1riIzzaeh_gh7ASOfaNPnvB3m5lM_-o/view?usp=sharing)| 45|
+|HRNet-W48     |   640   |    70.5   |     71.0     |  72.6 |   [model](https://drive.google.com/file/d/1pLg8B1ut4VS7HnjzLadfm0tJIa2IxzMR/view?usp=sharing)  | 57 |
+|HRNet-W48     |   800   |    70.8   |     71.5     |        72.5    | [model](https://drive.google.com/file/d/1Z8WrO9k3gRX48goRSegaav8mSrTjjz64/view?usp=sharing)|   87|
 
 <!-- | Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  | time/ms
 |--------------|---------|-----------|--------------|-------------------| 
