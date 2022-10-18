@@ -1,10 +1,12 @@
-# AdaptivePose: Human Parts as Adaptive Points
+# AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression
+The current code can reproduce the results reported in AdaptivePose++.
+
 a compact and powerful single-stage multi-person pose estimation framework:
 ![](readme/framework.jpg)
 > [**AdaptivePose: Human Parts as Adaptive Points**](https://arxiv.org/abs/2112.13635),            
 > Yabo Xiao, Dongdong Yu, Xiaojuan Wang, Guoli Wang, Qian Zhang, Mingshu He;        
 > *Published on AAAI2022*   
-> AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression            
+> [**AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression**](https://arxiv.org/abs/2210.04014)           
 > Yabo Xiao, Xiaojuan Wang, Dongdong Yu, Kai Su, Lei Jin, Mei Song, Shuicheng Yan, Jian Zhao;      
 > *Submitted to TCSVT*   
       
@@ -120,6 +122,13 @@ If you find this project useful for your research, please use the following BibT
   volume={36},
   number={3},
   pages={2813--2821},
+  year={2022}
+}
+
+@article{xiao2022adaptivepose++,
+  title={AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression},
+  author={Xiao, Yabo and Wang, Xiaojuan and Yu, Dongdong and Su, Kai and Jin, Lei and Song, Mei and Yan, Shuicheng and Zhao, Jian},
+  journal={arXiv preprint arXiv:2210.04014},
   year={2022}
 }
 ```
