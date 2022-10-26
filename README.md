@@ -1,7 +1,7 @@
 # AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression
 The current code can reproduce the results reported in AdaptivePose++.
 
-a compact and powerful single-stage multi-person pose estimation framework:
+👏👏👏👏👏👏👏👏👏👏👏a compact and powerful single-stage multi-person pose estimation framework:
 ![](readme/framework.jpg)
 > [**AdaptivePose: Human Parts as Adaptive Points**](https://arxiv.org/abs/2112.13635),            
 > Yabo Xiao, Dongdong Yu, Xiaojuan Wang, Guoli Wang, Qian Zhang, Mingshu He;        
@@ -35,7 +35,7 @@ Multi-person pose estimation generally follows top-down and bottom-up paradigms.
 ## Main results
 
 ### The single-stage multi-person pose estimation on COCO validation
-<!-- - **Speed** Please refer to the paper(https://arxiv.org/abs/2112.13635) for inference time. The performance is slightly better than the reported in paper. -->
+<!-- - **Speed** Please refer to the paper(https://arxiv.org/abs/2112.13635) for inference time 🚀🚀🚀. The performance is slightly better than the reported in paper. -->
 The time is calculated on a single Tesla V100,  which is more faster than the speed reported in paper.
 We found that stacking more 3*3 conv-relu in each brach can further improve the performance
 
@@ -90,7 +90,7 @@ The pretrain models can be downloaded from [pretrain_models](https://drive.googl
 
 ## Training and Testing
 
-After preparing the environment and data, you can train or test AdaptivePose with different network and input resolution. 
+After preparing the environment and data, you can train or test AdaptivePose with different network and input resolution. ___🚀🚀🚀 Note that the image resolution can be optionally adjusted according to user's requirements for obtaining the different speed-accuracy trade-offs! 🚀🚀🚀___
 
 DLA34 with 512 pixels:
 ```
