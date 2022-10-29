@@ -15,7 +15,7 @@ EXPID=coco640
 EXPNAME=$ARCNAME'_'$EXPID
 TASK=multi_pose_wodet
 DATASET=coco_hp_wodet
-RES=640
+RES=800
 EXPDIR=$CURRENT_DIR/../exp/$TASK/$EXPNAME
 mkdir -p $EXPDIR
 
