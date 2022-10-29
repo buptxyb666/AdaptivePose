@@ -11,7 +11,7 @@ cd $CURRENT_DIR
 
 
 ARCNAME=hrnet_48 
-EXPID=coco640
+EXPID=coco800
 EXPNAME=$ARCNAME'_'$EXPID
 TASK=multi_pose_wodet
 DATASET=coco_hp_wodet
