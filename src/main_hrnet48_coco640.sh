@@ -39,7 +39,7 @@ echo "Start single-scale test with flip"
 echo "Start multi-scale test with flip"
 
 /opt/tiger/torch12/bin/python test.py $TASK --exp_id $EXPNAME --dataset $DATASET \
---resume --not_reg_offset --not_reg_hp_offset --K 20 --not_hm_hp --arch $ARCNAME --input_res $RES --keep_res --flip_test --test_scales 1,1.25,1.5,1.75
+--resume --not_reg_offset --not_reg_hp_offset --K 20 --not_hm_hp --arch $ARCNAME --input_res $RES --keep_res --flip_test --test_scales 0.8,1,1.2,1.4,1.6
 
 
 
