@@ -6,11 +6,7 @@ The current code can reproduce the results reported in AdaptivePose++.
 > [**AdaptivePose: Human Parts as Adaptive Points**](https://arxiv.org/abs/2112.13635),            
 > Yabo Xiao, Dongdong Yu, Xiaojuan Wang, Guoli Wang, Qian Zhang, Mingshu He;        
 > *Published on AAAI2022*   
-<<<<<<< HEAD
 > [**AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression**](https://arxiv.org/abs/2210.04014)      
-=======
-> [**AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression**](https://arxiv.org/abs/2210.04014)           
->>>>>>> 75f0cbcf65670ffbc6a83d8293d2965f256b3767
 > Yabo Xiao, Xiaojuan Wang, Dongdong Yu, Kai Su, Lei Jin, Mei Song, Shuicheng Yan, Jian Zhao;      
 > *Submitted to TCSVT*   
       
@@ -39,18 +35,6 @@ Multi-person pose estimation generally follows top-down and bottom-up paradigms.
 ## Main results
 
 ### The single-stage multi-person pose estimation on COCO validation
-<<<<<<< HEAD
-<!-- - **Speed** Please refer to the paper(https://arxiv.org/abs/2112.13635) for inference time. The performance is slightly better than the reported in paper. -->
-The time is calculated on a single Tesla V100, which is more faster than the speed reported in paper
-We found that stacking more 3*3 conv-relu in each brach can further improve the performance
-
-| Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  | time/ms|
-|--------------|---------|-----------|--------------|-------------------|   ---    |  
-|DLA-34        |   512   |   65.8    |   66.2       | 68.8    | [model](https://drive.google.com/file/d/110MSVGZWYF8clzWPW_5zgW47BzI7w-2M/view?usp=sharing)  | 33|
-|DLA-34        |   640   |    67.2   |     67.7     | 69.3        |  [model](https://drive.google.com/file/d/1F1riIzzaeh_gh7ASOfaNPnvB3m5lM_-o/view?usp=sharing)| 45|
-|HRNet-W48     |   640   |    70.5   |     71.0     |  72.6 |   [model](https://drive.google.com/file/d/1pLg8B1ut4VS7HnjzLadfm0tJIa2IxzMR/view?usp=sharing)  | 57 |
-|HRNet-W48     |   800   |    70.8   |     71.5     |        72.5    | [model](https://drive.google.com/file/d/1Z8WrO9k3gRX48goRSegaav8mSrTjjz64/view?usp=sharing)|   87|
-=======
 <!-- - **Speed** Please refer to the paper(https://arxiv.org/abs/2112.13635) for inference time 🚀🚀🚀. The performance is slightly better than the reported in paper. -->
 The time is calculated on a single Tesla V100,  which is more faster than the speed reported in paper.
 We found that stacking more 3*3 conv-relu in each brach can further improve the performance
@@ -61,7 +45,7 @@ We found that stacking more 3*3 conv-relu in each brach can further improve the 
 |DLA-34        |   640   |    67.2   |     67.7     | 69.3        |  [model](https://drive.google.com/file/d/1F1riIzzaeh_gh7ASOfaNPnvB3m5lM_-o/view?usp=sharing)| 45 |
 |HRNet-W48     |   640   |    70.5   |     71.0     |  72.6 |   [model](https://drive.google.com/file/d/1pLg8B1ut4VS7HnjzLadfm0tJIa2IxzMR/view?usp=sharing)  | 57 |
 |HRNet-W48     |   800   |    70.8   |     71.5     |        72.5    | [model](https://drive.google.com/file/d/1Z8WrO9k3gRX48goRSegaav8mSrTjjz64/view?usp=sharing)|  87 |
->>>>>>> 75f0cbcf65670ffbc6a83d8293d2965f256b3767
+
 
 <!-- | Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  | time/ms
 |--------------|---------|-----------|--------------|-------------------| 
@@ -114,6 +98,12 @@ DLA34 with 512 pixels:
 cd src
 bash main_dla34_coco512.sh
 ```
+HRNet-W32 with 512 pixels:
+```
+cd src
+bash main_hrnet32_coco512.sh
+```
+
 HRNet-W48 with 640 pixels:
 ```
 cd src
