@@ -8,7 +8,7 @@ The current code can reproduce the results reported in AdaptivePose++.
 > *Published on AAAI2022*   
 > [**AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression**](https://arxiv.org/abs/2210.04014)      
 > Yabo Xiao, Xiaojuan Wang, Dongdong Yu, Kai Su, Lei Jin, Mei Song, Shuicheng Yan, Jian Zhao;      
-> *Submitted to TCSVT*   
+> *Submitted to TIP*   
       
 
 
@@ -45,6 +45,13 @@ We found that stacking more 3*3 conv-relu in each brach can further improve the 
 |DLA-34        |   640   |    67.2   |     67.7     | 69.3        |  [model](https://drive.google.com/file/d/1F1riIzzaeh_gh7ASOfaNPnvB3m5lM_-o/view?usp=sharing)| 45 |
 |HRNet-W48     |   640   |    70.5   |     71.0     |  72.6 |   [model](https://drive.google.com/file/d/1pLg8B1ut4VS7HnjzLadfm0tJIa2IxzMR/view?usp=sharing)  | 57 |
 |HRNet-W48     |   800   |    70.8   |     71.5     |        72.5    | [model](https://drive.google.com/file/d/1Z8WrO9k3gRX48goRSegaav8mSrTjjz64/view?usp=sharing)|  87 |
+
+We further employ the OKS loss for regression head and achieve the better performance without Inference overhead. Other models will release soon. 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
+
+| Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  |time/ms|
+|--------------|---------|-----------|--------------|-------------------|   ---    | --- |
+|DLA-34        |   512   |   67.0    |   67.4       | 69.2    | [model](https://drive.google.com/file/d/1AFsD619kxt90lBp5bDhqDtOAAm1O_li_/view?usp=share_link)  | 33| 
+
 
 
 <!-- | Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  | time/ms
