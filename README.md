@@ -8,8 +8,7 @@ The current code can reproduce the results reported in AdaptivePose++.
 > *Published on AAAI2022*   
 > [**AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression**](https://arxiv.org/abs/2210.04014)      
 > Yabo Xiao, Xiaojuan Wang, Dongdong Yu, Kai Su, Lei Jin, Mei Song, Shuicheng Yan, Jian Zhao;      
-> *Submitted to TIP*   
-      
+
 
 
 <!-- Contact: [xiaoyabo@bupt.edu.cn](mailto:xiaoyabo@bupt.edu.cn). Any questions or discussions about pose estiamtion task are welcomed!  -->
