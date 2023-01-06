@@ -41,6 +41,7 @@ We found that stacking more 3*3 conv-relu in each brach can further improve the 
 | Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  |time/ms|
 |--------------|---------|-----------|--------------|-------------------|   ---    | --- |
 |DLA-34        |   512   |   65.8    |   66.2       | 68.8    | [model](https://drive.google.com/file/d/110MSVGZWYF8clzWPW_5zgW47BzI7w-2M/view?usp=sharing)  | 33| 
+|HRNet-W32        |   512   |   68.0    |   68.5       | 69.7    | [model](https://drive.google.com/file/d/157y1W7-a5k1G-DnwtIz1aVmlcldH3IKp/view?usp=share_link) |46 | 
 |DLA-34        |   640   |    67.2   |     67.7     | 69.3        |  [model](https://drive.google.com/file/d/1F1riIzzaeh_gh7ASOfaNPnvB3m5lM_-o/view?usp=sharing)| 45 |
 |HRNet-W48     |   640   |    70.5   |     71.0     |  72.6 |   [model](https://drive.google.com/file/d/1pLg8B1ut4VS7HnjzLadfm0tJIa2IxzMR/view?usp=sharing)  | 57 |
 |HRNet-W48     |   800   |    70.8   |     71.5     |        72.5    | [model](https://drive.google.com/file/d/1Z8WrO9k3gRX48goRSegaav8mSrTjjz64/view?usp=sharing)|  87 |
