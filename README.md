@@ -51,7 +51,8 @@ We further employ the OKS loss for regression head and achieve the better perfor
 | Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  |time/ms|
 |--------------|---------|-----------|--------------|-------------------|   ---    | --- |
 |DLA-34        |   512   |   67.0    |   67.4       | 69.2    | [model](https://drive.google.com/file/d/1AFsD619kxt90lBp5bDhqDtOAAm1O_li_/view?usp=share_link)  | 33| 
-
+|HRNet-W32        |   512   |   68.6    |   69.1       | 71.2    | [model]() |46 | 
+|HRNet-W48     |   640   |    71.0   |     71.5     |  73.2 |   [model]()  | 57 |
 
 
 <!-- | Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  | time/ms
