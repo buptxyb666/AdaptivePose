@@ -46,23 +46,15 @@ We found that stacking more 3*3 conv-relu in each brach can further improve the 
 |HRNet-W48     |   640   |    70.5   |     71.0     |  72.6 |   [model](https://drive.google.com/file/d/1pLg8B1ut4VS7HnjzLadfm0tJIa2IxzMR/view?usp=sharing)  | 57 |
 |HRNet-W48     |   800   |    70.8   |     71.5     |        72.5    | [model](https://drive.google.com/file/d/1Z8WrO9k3gRX48goRSegaav8mSrTjjz64/view?usp=sharing)|  87 |
 
-We further employ the OKS loss for regression head and achieve the better performance without Inference overhead. Other models will release soon. 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
+We further employ the OKS loss for regression head and achieve the better performance without Inference overhead. Outperforming all bottom-up and single-stage methods with faster speed !!! 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 
 | Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  |time/ms|
 |--------------|---------|-----------|--------------|-------------------|   ---    | --- |
 |DLA-34        |   512   |   67.0    |   67.4       | 69.2    | [model](https://drive.google.com/file/d/1AFsD619kxt90lBp5bDhqDtOAAm1O_li_/view?usp=share_link)  | 33| 
-|HRNet-W32        |   512   |   68.6    |   69.1       | 71.2    | [model]() |46 | 
-|HRNet-W48     |   640   |    71.0   |     71.5     |  73.2 |   [model]()  | 57 |
+|HRNet-W32        |   512   |   68.6    |   69.1       | 71.2    | [model](https://drive.google.com/file/d/1mzGuVczYBzE0B1zsRFL_FMNJEcW4Cr-B/view?usp=share_link) |46 | 
+|HRNet-W48     |   640   |    71.0   |     71.5     |  73.2 |   [model](https://drive.google.com/file/d/147GwtZ4Ht3xQkVIbPJDRtVNhAQeL1rPB/view?usp=share_link)  | 57 |
 
 
-<!-- | Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  | time/ms
-|--------------|---------|-----------|--------------|-------------------| 
-|DLA-34        |   512   |   65.8    |   66.2       | 66.3       |        33
-|DLA-34        |   640   |    67.2   | 67.7         | 69.3            | 45
-|HRNet-W32     |   512   |      67.3     |               |
-Hrnet-w32.  640.   68.5
-|HRNet-W48     |   640   |    70.5   |     71.0     |        72.6       |  57
-|HRNet-W48     |   800   |    70.8   |     71.5     |        72.5       |   87 -->
 
 
 <!-- ## Installation
