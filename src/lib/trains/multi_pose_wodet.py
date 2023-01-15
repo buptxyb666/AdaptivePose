@@ -5,7 +5,8 @@ from __future__ import print_function
 import torch
 import numpy as np
 
-from models.losses import FocalLoss, RegL1Loss, RegLoss, RegWeightedL1Loss_coco, Giou
+from models.losses import FocalLoss, RegL1Loss, RegLoss, RegWeightedL1Loss_coco
+from models.oks_loss import OKSLoss
 from models.decode import multi_pose_decode_wodet, multi_pose_decode, multi_pose_decode_wodet
 from models.utils import _sigmoid, flip_tensor, flip_lr_off, flip_lr
 from utils.debugger import Debugger
@@ -22,7 +23,8 @@ class MultiPoseLoss(torch.nn.Module):
                    torch.nn.SmoothL1Loss(reduction='sum')    #torch.nn.L1Loss(reduction='sum')
     self.crit_reg = RegL1Loss() if opt.reg_loss == 'l1' else \
                     RegLoss() if opt.reg_loss == 'sl1' else None
-    # self.giou = Giou()
+    self.oks_loss = OKSLoss(linear=True,
+                            loss_weight=5.0)
     self.opt = opt
 
   def forward(self, outputs, batch):
@@ -30,7 +32,7 @@ class MultiPoseLoss(torch.nn.Module):
     opt = self.opt
     hm_loss, wh_loss, off_loss = 0, 0, 0
     hp_loss, off_loss, hm_hp_loss, hp_offset_loss = 0, 0, 0, 0
-    # giou = 0
+    oks_loss = 0
     for s in range(opt.num_stacks):
       output = outputs[s]
       output['hm'] = _sigmoid(output['hm'])
@@ -65,6 +67,7 @@ class MultiPoseLoss(torch.nn.Module):
       else:
         hp_loss += self.crit_kp(output['hps'], batch['hps_mask'], 
                                 batch['ind'], batch['hps']) / opt.num_stacks
+        oks_loss += self.oks_loss(output['hps'], batch['hps'], batch['hps_mask'], batch['area'], batch['ind'])/opt.num_stacks
 
       # if opt.giou and opt.giou_weight > 0:
       #   giou += self.giou(output['hps'], batch['hps_mask'], batch['reg_mask'], batch['ind'], batch['pseudo_box'])
@@ -83,9 +86,10 @@ class MultiPoseLoss(torch.nn.Module):
           output['hm_hp'], batch['hm_hp']) / opt.num_stacks
     loss = opt.hm_weight * hm_loss + \
            opt.hp_weight * hp_loss + \
-           opt.hm_hp_weight * hm_hp_loss 
+           opt.hm_hp_weight * hm_hp_loss + \
+           oks_loss
     
-    loss_stats = {'loss': loss, 'hm_loss': hm_loss, 'hp_loss': hp_loss, 
+    loss_stats = {'loss': loss, 'hm_loss': hm_loss, 'hp_loss': hp_loss, 'oks_loss': oks_loss,
                   'hm_hp_loss': hm_hp_loss}
     return loss, loss_stats
 
@@ -94,7 +98,7 @@ class MultiPoseTrainer_wodet(BaseTrainer):
     super(MultiPoseTrainer_wodet, self).__init__(opt, model, optimizer=optimizer)
   
   def _get_losses(self, opt):
-    loss_states = ['loss', 'hm_loss', 'hp_loss', 'hm_hp_loss']
+    loss_states = ['loss', 'hm_loss', 'hp_loss', 'hm_hp_loss', 'oks_loss']
     loss = MultiPoseLoss(opt)
     return loss_states, loss
 
