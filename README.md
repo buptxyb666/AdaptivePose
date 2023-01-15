@@ -110,6 +110,8 @@ bash main_hrnet48_coco640.sh
 
 ## Running demo 
 
+The input aspect ratio is closer to 1, the  speed is faster ！！！
+
 visualize coco 
 
 
