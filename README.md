@@ -110,7 +110,27 @@ cd src
 bash main_hrnet48_coco640.sh
 ```
 
- 
+## Running demo 
+
+visualize coco 
+
+
+```
+torch12/bin/python test.py multi_pose_wodet --exp_id $EXPNAME --dataset coco_hp_wodet --resume --not_reg_offset --not_reg_hp_offset --K 20 --not_hm_hp --arch $ARCNAME --input_res $RES --keep_res --debug 1
+```
+
+visualize customized image 
+
+```
+torch12/bin/python demo.py multi_pose_wodet --exp_id $EXPNAME --dataset coco_hp_wodet --resume --not_reg_offset --not_reg_hp_offset --K 20 --not_hm_hp --arch $ARCNAME --input_res $RES --keep_res --debug 1 --demo path/to/image_dir --vis_thresh 0.1
+```
+
+visualize customized video 
+
+```
+torch12/bin/python demo.py multi_pose_wodet --exp_id $EXPNAME --dataset coco_hp_wodet --resume --not_reg_offset --not_reg_hp_offset --K 20 --not_hm_hp --arch $ARCNAME --input_res $RES --keep_res --debug 1 --demo path/to/xx.mp4 --vis_thresh 0.1 
+```
+
 
 ## Develop
 
