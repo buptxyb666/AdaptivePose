@@ -8,9 +8,6 @@ The current code can reproduce the results reported in AdaptivePose++.
 > *Published on AAAI2022*   
 > [**AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression**](https://arxiv.org/abs/2210.04014)      
 > Yabo Xiao, Xiaojuan Wang, Dongdong Yu, Kai Su, Lei Jin, Mei Song, Shuicheng Yan, Jian Zhao;      
-> *Submitted to TCSVT*   
-      
-
 
 <!-- Contact: [xiaoyabo@bupt.edu.cn](mailto:xiaoyabo@bupt.edu.cn). Any questions or discussions about pose estiamtion task are welcomed!  -->
 
@@ -42,19 +39,20 @@ We found that stacking more 3*3 conv-relu in each brach can further improve the 
 | Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  |time/ms|
 |--------------|---------|-----------|--------------|-------------------|   ---    | --- |
 |DLA-34        |   512   |   65.8    |   66.2       | 68.8    | [model](https://drive.google.com/file/d/110MSVGZWYF8clzWPW_5zgW47BzI7w-2M/view?usp=sharing)  | 33| 
+|HRNet-W32        |   512   |   68.0    |   68.5       | 69.7    | [model](https://drive.google.com/file/d/157y1W7-a5k1G-DnwtIz1aVmlcldH3IKp/view?usp=share_link) |46 | 
 |DLA-34        |   640   |    67.2   |     67.7     | 69.3        |  [model](https://drive.google.com/file/d/1F1riIzzaeh_gh7ASOfaNPnvB3m5lM_-o/view?usp=sharing)| 45 |
 |HRNet-W48     |   640   |    70.5   |     71.0     |  72.6 |   [model](https://drive.google.com/file/d/1pLg8B1ut4VS7HnjzLadfm0tJIa2IxzMR/view?usp=sharing)  | 57 |
 |HRNet-W48     |   800   |    70.8   |     71.5     |        72.5    | [model](https://drive.google.com/file/d/1Z8WrO9k3gRX48goRSegaav8mSrTjjz64/view?usp=sharing)|  87 |
 
+We further employ the OKS loss for regression head and achieve the better performance without Inference overhead. Outperforming all bottom-up and single-stage methods with faster speed !!! 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 
-<!-- | Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  | time/ms
-|--------------|---------|-----------|--------------|-------------------| 
-|DLA-34        |   512   |   65.8    |   66.2       | 66.3       |        33
-|DLA-34        |   640   |    67.2   | 67.7         | 69.3            | 45
-|HRNet-W32     |   512   |      67.3     |               |
-Hrnet-w32.  640.   68.5
-|HRNet-W48     |   640   |    70.5   |     71.0     |        72.6       |  57
-|HRNet-W48     |   800   |    70.8   |     71.5     |        72.5       |   87 -->
+| Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  |time/ms|
+|--------------|---------|-----------|--------------|-------------------|   ---    | --- |
+|DLA-34        |   512   |   67.0    |   67.4       | 69.2    | [model](https://drive.google.com/file/d/1AFsD619kxt90lBp5bDhqDtOAAm1O_li_/view?usp=share_link)  | 33| 
+|HRNet-W32        |   512   |   68.6    |   69.1       | 71.2    | [model](https://drive.google.com/file/d/1mzGuVczYBzE0B1zsRFL_FMNJEcW4Cr-B/view?usp=share_link) |46 | 
+|HRNet-W48     |   640   |    71.0   |     71.5     |  73.2 |   [model](https://drive.google.com/file/d/147GwtZ4Ht3xQkVIbPJDRtVNhAQeL1rPB/view?usp=share_link)  | 57 |
+
+
 
 
 <!-- ## Installation
@@ -110,7 +108,31 @@ cd src
 bash main_hrnet48_coco640.sh
 ```
 
- 
+## Running demo 
+
+visualize coco 
+
+
+```
+torch12/bin/python test.py multi_pose_wodet --exp_id $EXPNAME --dataset coco_hp_wodet --resume --not_reg_offset --not_reg_hp_offset --K 20 --not_hm_hp --arch $ARCNAME --input_res $RES --keep_res --debug 1
+```
+
+visualize customized image 
+
+```
+torch12/bin/python demo.py multi_pose_wodet --exp_id $EXPNAME --dataset coco_hp_wodet --resume --not_reg_offset --not_reg_hp_offset --K 20 --not_hm_hp --arch $ARCNAME --input_res $RES --keep_res --debug 1 --demo path/to/image_dir --vis_thresh 0.1
+```
+
+visualize customized video 
+
+```
+torch12/bin/python demo.py multi_pose_wodet --exp_id $EXPNAME --dataset coco_hp_wodet --resume --not_reg_offset --not_reg_hp_offset --K 20 --not_hm_hp --arch $ARCNAME --input_res $RES --keep_res --debug 1 --demo path/to/xx.mp4 --vis_thresh 0.1 
+```
+https://user-images.githubusercontent.com/71114006/212531482-c02d6f04-2076-48fe-93d0-0e102536a1e6.mp4   
+
+
+https://user-images.githubusercontent.com/71114006/212531759-692fc7ac-d0b9-468a-b7db-7ba83a253947.mp4
+
 
 ## Develop
 
