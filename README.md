@@ -9,13 +9,6 @@ The current code can reproduce the results reported in AdaptivePose++.
 > [**AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression**](https://arxiv.org/abs/2210.04014)      
 > Yabo Xiao, Xiaojuan Wang, Dongdong Yu, Kai Su, Lei Jin, Mei Song, Shuicheng Yan, Jian Zhao;      
 
-
-https://user-images.githubusercontent.com/71114006/212531482-c02d6f04-2076-48fe-93d0-0e102536a1e6.mp4
-
-
-https://user-images.githubusercontent.com/71114006/212531489-a31e1430-8bb2-43e1-b1e8-9e27dc7a97e7.mp4
-
-
 <!-- Contact: [xiaoyabo@bupt.edu.cn](mailto:xiaoyabo@bupt.edu.cn). Any questions or discussions about pose estiamtion task are welcomed!  -->
 
 ## Abstract 
@@ -135,6 +128,10 @@ visualize customized video
 ```
 torch12/bin/python demo.py multi_pose_wodet --exp_id $EXPNAME --dataset coco_hp_wodet --resume --not_reg_offset --not_reg_hp_offset --K 20 --not_hm_hp --arch $ARCNAME --input_res $RES --keep_res --debug 1 --demo path/to/xx.mp4 --vis_thresh 0.1 
 ```
+https://user-images.githubusercontent.com/71114006/212531482-c02d6f04-2076-48fe-93d0-0e102536a1e6.mp4   
+
+
+https://user-images.githubusercontent.com/71114006/212531759-692fc7ac-d0b9-468a-b7db-7ba83a253947.mp4
 
 
 ## Develop
