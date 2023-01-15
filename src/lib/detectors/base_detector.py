@@ -54,8 +54,7 @@ class BaseDetector(object):
 
 
 
-  def pre_process(self, image, scale, img_name, meta=None):
-   
+  def pre_process(self, image, scale, meta=None):
     if self.opt.fix_res:
       #print('################################fix_res########################')
       sf = 1.0
@@ -78,7 +77,7 @@ class BaseDetector(object):
     inp_image = cv2.warpAffine(
       resized_image, trans_input, (inp_width, inp_height),
       flags=cv2.INTER_LINEAR)
-    cv2.imwrite('/data/yabo.xiao/pad_vis/'+ img_name,inp_image)
+    # cv2.imwrite('/data/yabo.xiao/pad_vis/'+ img_name,inp_image)
     inp_image = ((inp_image / 255. - self.mean) / self.std).astype(np.float32)
     # print(inp_image.shape)
     images = inp_image.transpose(2, 0, 1).reshape(1, 3, inp_height, inp_width)
@@ -105,7 +104,8 @@ class BaseDetector(object):
   def show_results(self, debugger, image, results):
    raise NotImplementedError
 
-  def run(self, image_or_path_or_tensor, img_path,meta=None):
+  def run(self, image_or_path_or_tensor, meta=None):
+    
     load_time, pre_time, net_time, dec_time, post_time = 0, 0, 0, 0, 0
     merge_time, tot_time = 0, 0
     debugger = Debugger(dataset=self.opt.dataset, ipynb=(self.opt.debug==3),
@@ -119,7 +119,7 @@ class BaseDetector(object):
     else:
       image = image_or_path_or_tensor['image'][0].numpy()
       pre_processed_images = image_or_path_or_tensor
-      pre_processed = True
+      pre_processed = True 
     
     loaded_time = time.time()
     load_time += (loaded_time - start_time)
@@ -130,7 +130,7 @@ class BaseDetector(object):
       if not pre_processed:
         images, meta = self.pre_process(image, scale, meta)
       else:
-        # import pdb; pdb.set_trace()
+        # 
         images = pre_processed_images['images'][scale][0]
         meta = pre_processed_images['meta'][scale]
         meta = {k: v.numpy()[0] for k, v in meta.items()}
@@ -149,7 +149,7 @@ class BaseDetector(object):
       if self.opt.debug >= 2:
         self.debug(debugger, images, dets, output, scale)
       
-      dets,adapt_pts = self.post_process(dets, meta, scale)
+      dets, adapt_pts = self.post_process(dets, meta, scale)
       torch.cuda.synchronize()
       post_process_time = time.time()
       post_time += post_process_time - decode_time
@@ -161,9 +161,14 @@ class BaseDetector(object):
     end_time = time.time()
     merge_time += end_time - post_process_time
     tot_time += end_time - start_time
-
+    
+    import pudb;pudb.set_trace()
     if self.opt.debug >= 1:
-      self.show_results(debugger, image, results, adapt_pts, img_path)
+      save_path = self.opt.output_path + 'pred'
+      import os
+      if os.path.exists(save_path):
+        os.mkdir(save_path)
+      self.show_results(debugger, image, results, adapt_pts, save_path, pre_processed_images['img_name'])
     
     return {'results': results, 'tot': tot_time, 'load': load_time,
             'pre': pre_time, 'net': net_time, 'dec': dec_time,

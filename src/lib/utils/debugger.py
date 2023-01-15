@@ -233,20 +233,22 @@ class Debugger(object):
   #                     (points[e[1], 0], points[e[1], 1]), self.ec[j], 2,
   #                     lineType=cv2.LINE_AA)
 
-  def add_coco_hp_with_ap(self, points,adapt_pts,img_path, img_id='default'): 
+  def add_coco_hp_with_ap(self, points, adapt_pts, save_path, img_name, img_id='default', vis_adapt_pts=False, is_video=False): 
 
     points = np.array(points, dtype=np.int32).reshape(self.num_joints, 2)
     adapt_pts = np.array(adapt_pts, dtype=np.int32).reshape(8, 2)
 
-#     for j in range(8):
-#       if j == 0:
-#         cv2.circle(self.imgs[img_id],
-#                     (adapt_pts[j, 0], adapt_pts[j, 1]), 4, self.adapt_point[j], -1)
-#       else:
-#         # continue
-#         cv2.circle(self.imgs[img_id],
-#                     (adapt_pts[j, 0], adapt_pts[j, 1]), 3, self.adapt_point[j], -1)
-#     self.save_img(imgId=img_id, path='/home/dell/xyb/vis_gaussian/',img_path=img_path.item())
+    if vis_adapt_pts:
+      for j in range(8):
+        if j == 0:
+          cv2.circle(self.imgs[img_id],
+                      (adapt_pts[j, 0], adapt_pts[j, 1]), 4, self.adapt_point[j], -1)
+        else:
+          # continue
+          cv2.circle(self.imgs[img_id],
+                      (adapt_pts[j, 0], adapt_pts[j, 1]), 3, self.adapt_point[j], -1)
+      if not is_video:
+        self.save_img(imgId=img_id, save_path=save_path, img_name=img_name)
 
     
     for j, e in enumerate(self.edges):
@@ -259,7 +261,9 @@ class Debugger(object):
                   (points[j, 0], points[j, 1]), 3 , (0,0,0), 4)
       cv2.circle(self.imgs[img_id],
                   (points[j, 0], points[j, 1]), 3, self.colors_hp[j], -1)
-    self.save_img(imgId=img_id, path='/home/dell/xyb/vis_gaussian/',img_path=img_path.item())
+    if not is_video:
+      self.save_img(imgId=img_id, save_path=save_path, img_name=img_name)
+    return self.imgs[img_id]
 
   def show_all_imgs(self, pause=False, time=0):
     if not self.ipynb:
@@ -282,8 +286,12 @@ class Debugger(object):
           self.plt.imshow(v)
       self.plt.show()
 
-  def save_img(self, imgId='default', path='./cache/debug/',img_path='1'):
-    cv2.imwrite(path + '{}.jpg'.format(img_path), self.imgs[imgId])
+  # def save_img(self, imgId='default', path='./cache/debug/',img_path='1'):
+  #   cv2.imwrite(path + '{}.jpg'.format(img_path), self.imgs[imgId])
+
+  def save_img(self, imgId='default', save_path='./cache/debug/',img_name='1'):
+    # import pudb;pudb.set_trace()
+    cv2.imwrite(save_path + img_name, self.imgs[imgId])
     
   def save_all_imgs(self, path='./cache/debug/', prefix='', genID=False):
     if genID:

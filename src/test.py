@@ -26,7 +26,7 @@ class PrefetchDataset(torch.utils.data.Dataset):
     self.img_dir = dataset.img_dir
     self.pre_process_func = pre_process_func
     self.opt = opt
-  
+    
   def __getitem__(self, index):
     img_id = self.images[index]
     img_info = self.load_image_func(ids=[img_id])[0]
@@ -39,7 +39,7 @@ class PrefetchDataset(torch.utils.data.Dataset):
           image, scale, img_info['calib'])
       else:
         images[scale], meta[scale] = self.pre_process_func(image, scale, img_info['file_name'])
-    return img_id, {'images': images, 'image': image, 'meta': meta}
+    return img_id, {'images': images, 'image': image, 'meta': meta, 'img_name': img_info['file_name']}
 
   def __len__(self):
     return len(self.images)
@@ -67,7 +67,7 @@ def prefetch_test(opt):
   time_stats = ['tot', 'load', 'pre', 'net', 'dec', 'post', 'merge']
   avg_time_stats = {t: AverageMeter() for t in time_stats}
   for ind, (img_id, pre_processed_images) in enumerate(data_loader):
-    ret = detector.run(pre_processed_images,img_id)
+    ret = detector.run(pre_processed_images) ###################################
     results[img_id.numpy().astype(np.int32)[0]] = ret['results']
     Bar.suffix = '[{0}/{1}]|Tot: {total:} |ETA: {eta:} '.format(
                    ind, num_iters, total=bar.elapsed_td, eta=bar.eta_td)

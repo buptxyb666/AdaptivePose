@@ -19,24 +19,30 @@ def demo(opt):
   opt.debug = max(opt.debug, 1)
   Detector = detector_factory[opt.task]
   detector = Detector(opt)
-
+  # import pudb;pudb.set_trace()
   if opt.demo == 'webcam' or \
     opt.demo[opt.demo.rfind('.') + 1:].lower() in video_ext:
     cam = cv2.VideoCapture(0 if opt.demo == 'webcam' else opt.demo)
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v') #VideoWriter_fourcc为视频编解码器
+    size = (int(cam.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+    writer = cv2.VideoWriter('res.mp4', fourcc, 30.0, size)
     detector.pause = False
-    while True:
-        _, img = cam.read()
-        cv2.imshow('input', img)
-        ret = detector.run(img)
-        time_str = ''
-        for stat in time_stats:
-          time_str = time_str + '{} {:.3f}s |'.format(stat, ret[stat])
-        print(time_str)
-        if cv2.waitKey(1) == 27:
-            return  # esc to quit
+    if cam.isOpened():
+      while True:
+          a, img = cam.read()
+          if not a:  ##########
+            return    ###########
+          # cv2.imshow('input', img)
+          ret = detector.run(img)
+          time_str = ''
+          for stat in time_stats:
+            time_str = time_str + '{} {:.3f}s |'.format(stat, ret[stat])
+          print(time_str)
+          writer.write(ret['vis_img'])
+          # if cv2.waitKey(1) == 27:
+          #     return  # esc to quit
   else:
     if os.path.isdir(opt.demo):
-      #import pudb;pudb.set_trace()
       image_names = []
       ls = os.listdir(opt.demo)
       for file_name in sorted(ls):

@@ -25,6 +25,9 @@ class opts(object):
     self.parser.add_argument('--demo', default='/home/users/yabo.xiao/CNet_v2/img/', 
                              help='path to image/ image folders/ video. '
                                   'or "webcam"')
+    self.parser.add_argument('--output_path', default='/opt/tiger/adaptivepose', 
+                             help='path to output of demo image/ image folders/ video. '
+                                  'or "webcam"')
     self.parser.add_argument('--load_model', default='',
                              help='path to pretrained model')
     self.parser.add_argument('--resume', action='store_true',
@@ -377,7 +380,7 @@ class opts(object):
       def __init__(self, entries):
         for k, v in entries.items():
           self.__setattr__(k, v)
-    #print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    
     opt = self.parse(args)
     dataset = Struct(default_dataset_info[opt.task])
     opt.dataset = dataset.dataset
