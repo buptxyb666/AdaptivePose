@@ -105,7 +105,6 @@ class BaseDetector(object):
    raise NotImplementedError
 
   def run(self, image_or_path_or_tensor, meta=None):
-    
     load_time, pre_time, net_time, dec_time, post_time = 0, 0, 0, 0, 0
     merge_time, tot_time = 0, 0
     debugger = Debugger(dataset=self.opt.dataset, ipynb=(self.opt.debug==3),
@@ -148,7 +147,6 @@ class BaseDetector(object):
       
       if self.opt.debug >= 2:
         self.debug(debugger, images, dets, output, scale)
-      
       dets, adapt_pts = self.post_process(dets, meta, scale)
       torch.cuda.synchronize()
       post_process_time = time.time()
@@ -162,14 +160,28 @@ class BaseDetector(object):
     merge_time += end_time - post_process_time
     tot_time += end_time - start_time
     
-    import pudb;pudb.set_trace()
+    
     if self.opt.debug >= 1:
-      save_path = self.opt.output_path + 'pred'
+      # import pudb;pudb.set_trace()
       import os
-      if os.path.exists(save_path):
-        os.mkdir(save_path)
-      self.show_results(debugger, image, results, adapt_pts, save_path, pre_processed_images['img_name'])
+      if self.opt.demo in image_or_path_or_tensor: # customized image visualization
+        save_path = '/'.join(image_or_path_or_tensor.split('/')[:-1]) + '/pred/'   
+        if not os.path.exists(save_path):
+          os.makedirs(save_path)    
+        vis_img = self.show_results(debugger, image, results, adapt_pts, save_path, image_or_path_or_tensor.split('/')[-1])
+
+      elif self.opt.demo == 'webcam' or self.opt.demo[self.opt.demo.rfind('.') + 1:].lower() in ['mp4', 'mov', 'avi', 'mkv']:
+        # customized video visualization
+        save_path = self.opt.output_path + '/pred/'
+        vis_img = self.show_results(debugger, image, results, adapt_pts, save_path, None, is_video=True)
+
+      else:  # coco vis
+        save_path = self.opt.output_path + '/pred/'
+        if not os.path.exists(save_path):
+          os.makedirs(save_path)
+        vis_img = self.show_results(debugger, image, results, adapt_pts, save_path, image_or_path_or_tensor['img_name'][0])
     
     return {'results': results, 'tot': tot_time, 'load': load_time,
             'pre': pre_time, 'net': net_time, 'dec': dec_time,
-            'post': post_time, 'merge': merge_time}
+            'post': post_time, 'merge': merge_time,
+            'vis_img': vis_img}

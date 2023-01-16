@@ -21,10 +21,11 @@ from utils.debugger import Debugger
 
 from .base_detector import BaseDetector
 
-class MultiPoseDetector_wodet(BaseDetector):
+class MultiPoseDetector_wodet(BaseDetector): 
   def __init__(self, opt):
     super(MultiPoseDetector_wodet, self).__init__(opt)
     self.flip_idx = opt.flip_idx
+    self.debug = opt.debug
 
   def process(self, images, return_time=False):
     with torch.no_grad():
@@ -58,12 +59,14 @@ class MultiPoseDetector_wodet(BaseDetector):
       # dets = multi_pose_decode(
       #     output['hm'],output['wh'] ,output['hps'],
       #     reg=reg, hm_hp=hm_hp, hp_offset=hp_offset, K=self.opt.K)
-      dets = multi_pose_decode_wodet(
-         output['hm'], output['hps'],
-         reg=reg, hm_hp=hm_hp, hp_offset=hp_offset, K=self.opt.K)
-      # dets = multi_pose_decode_wodet_vis(
-      #      output['hm'], output['hps'],output['ap'],
-      #      reg=reg, hm_hp=hm_hp, hp_offset=hp_offset, K=self.opt.K)
+      if not self.debug:
+        dets = multi_pose_decode_wodet(
+          output['hm'], output['hps'],
+          reg=reg, hm_hp=hm_hp, hp_offset=hp_offset, K=self.opt.K)
+      else:
+        dets = multi_pose_decode_wodet_vis(
+            output['hm'], output['hps'],output['ap'],
+            reg=reg, hm_hp=hm_hp, hp_offset=hp_offset, K=self.opt.K)
 
 
     if return_time:
@@ -82,11 +85,11 @@ class MultiPoseDetector_wodet(BaseDetector):
 
     for j in range(1, self.num_classes + 1):
       dets[0][j] = np.array(dets[0][j], dtype=np.float32).reshape(-1, 35)
-      # import pdb; pdb.set_trace()
       #dets[0][j][:, :4] /= scale
       dets[0][j][:, 1:] /= (scale*meta['sf'])
+      adapt_pts = np.asarray(adapt_pts)
       adapt_pts /= (scale*meta['sf'])
-    return dets[0] ,adapt_pts
+    return dets[0] ,adapt_pts.tolist()
 
   def kps_to_bbox(self, det, mode='max'):
     assert det.shape == (20,35)
@@ -101,7 +104,6 @@ class MultiPoseDetector_wodet(BaseDetector):
 
 
   def merge_outputs(self, detections):
-    # import pudb; pudb.set_trace()
     results = {}    
     if self.opt.nms or len(self.opt.test_scales) > 1:
       results[1] = np.concatenate(
@@ -127,13 +129,14 @@ class MultiPoseDetector_wodet(BaseDetector):
         output['hm_hp'][0].detach().cpu().numpy())
       debugger.add_blend_img(img, pred, 'pred_hmhp')
   
-  def show_results(self, debugger, image, results, adapt_pts, image_path):
+  def show_results(self, debugger, image, results, adapt_pts, save_path, img_name, is_video=False):
     debugger.add_img(image, img_id='multi_pose')
+    vis_img = image
     for idx,bbox in enumerate(results[1]):
       if bbox[0] > self.opt.vis_thresh:
-        # import pudb; pudb.set_trace()
         # debugger.add_coco_bbox(bbox[:4], 0, bbox[4], img_id='multi_pose')
-        debugger.add_coco_hp_with_ap(bbox[1:35], adapt_pts[idx], image_path,img_id='multi_pose') 
-    # debugger.show_all_imgs(pause=self.pause)
+        vis_img = debugger.add_coco_hp_with_ap(bbox[1:35], adapt_pts[idx], save_path, img_name, img_id='multi_pose', is_video=is_video) 
+    return vis_img
+  
 
 

@@ -22,7 +22,7 @@ class opts(object):
                                   '2: show the network output features'
                                   '3: use matplot to display' # useful when lunching training with ipython notebook
                                   '4: save all visualizations to disk')
-    self.parser.add_argument('--demo', default='/home/users/yabo.xiao/CNet_v2/img/', 
+    self.parser.add_argument('--demo', default='/home/users/yabo.xiao/CNet_v2/img', 
                              help='path to image/ image folders/ video. '
                                   'or "webcam"')
     self.parser.add_argument('--output_path', default='/opt/tiger/adaptivepose', 
@@ -380,7 +380,7 @@ class opts(object):
       def __init__(self, entries):
         for k, v in entries.items():
           self.__setattr__(k, v)
-    
+    #print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     opt = self.parse(args)
     dataset = Struct(default_dataset_info[opt.task])
     opt.dataset = dataset.dataset

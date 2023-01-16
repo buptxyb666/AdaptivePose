@@ -99,6 +99,8 @@ class MultiPoseDataset_wodet(data.Dataset):
     hp_ind = np.zeros((self.max_objs * num_joints), dtype=np.int64)
     hp_mask = np.zeros((self.max_objs * num_joints), dtype=np.int64)
 
+    area = np.zeros((self.max_objs), dtype=np.float32)
+
     draw_gaussian = draw_msra_gaussian if self.opt.mse_loss else \
                     draw_umich_gaussian
 
@@ -145,6 +147,7 @@ class MultiPoseDataset_wodet(data.Dataset):
       ###################################################################################################################
 
       ct_int = ct.astype(np.int32)
+      area[k] = ann['area'] * (self.opt.input_res / s) / 16.0 # area of 4 stride
 
 
       if ct_int[0] >= 0 and ct_int[0] < output_res and \
@@ -188,7 +191,7 @@ class MultiPoseDataset_wodet(data.Dataset):
     # cv2.imwrite('/data/yabo.xiao/coco_vis_center/'+file_name,inp_)
     
     ret = {'input': inp, 'hm': hm, 'reg_mask': reg_mask, 'ind': ind, 'wh': wh,
-           'hps': kps, 'hps_mask': kps_mask}
+           'hps': kps, 'hps_mask': kps_mask, 'area': area} 
     if self.opt.dense_hp:
       dense_kps = dense_kps.reshape(num_joints * 2, output_res, output_res)
       dense_kps_mask = dense_kps_mask.reshape(
