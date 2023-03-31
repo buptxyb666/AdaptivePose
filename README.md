@@ -53,6 +53,13 @@ We further employ the OKS loss for regression head and achieve the better perfor
 |HRNet-W48     |   640   |    71.0   |     71.5     |  73.2 |   [model](https://drive.google.com/file/d/147GwtZ4Ht3xQkVIbPJDRtVNhAQeL1rPB/view?usp=share_link)  | 57 |
 
 
+### The single-stage multi-person pose estimation on CrowdPose test.
+
+| Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  |time/ms|
+|--------------|---------|-----------|--------------|-------------------|   ---    | --- |
+|HRNet-W32        |   512   |   67.5    |   68.0       | 69.3    | [model](https://drive.google.com/file/d/14LQupokqqi-kgRQeh2vU6Fa82iujcKQs/view?usp=share_link) |46 | 
+|HRNet-W48     |   640   |    71.0   |     71.5     |  72.6 |   [model](https://drive.google.com/file/d/1Wv20VnH_ngPqeYGBcDG6qy_uU6w6t0wc/view?usp=share_link)  | 57 |
+
 
 
 <!-- ## Installation
