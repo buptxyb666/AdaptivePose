@@ -32,14 +32,18 @@ class CrowdPose(data.Dataset):
     self.acc_idxs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     self.data_dir = os.path.join(opt.data_dir, 'crowdpose')
     self.img_dir = os.path.join(self.data_dir, 'images')
-    if split == 'test':
+    if split == 'test' or split == 'val':
       self.annot_path = os.path.join(
           self.data_dir, 'json', 
-          'crowdpose_{}.json'.format(split))
+          'crowdpose_{}.json'.format('test')) 
+    # elif split == 'val':
+    #   self.annot_path = os.path.join(
+    #     self.data_dir, 'json', 
+    #     'crowdpose_{}.json'.format(split))
     else:
       self.annot_path = os.path.join(
         self.data_dir, 'json', 
-        'crowdpose_{}.json'.format(split))
+        'crowdpose_{}.json'.format('trainval'))
     self.max_objs = 32
     self._data_rng = np.random.RandomState(123)
     self._eig_val = np.array([0.2141788, 0.01817699, 0.00341571],
@@ -70,16 +74,16 @@ class CrowdPose(data.Dataset):
   def _to_float(self, x):
     return float("{:.2f}".format(x))
 
-  def kps_to_bbox(self, kps, mode='max'):
-    assert kps.shape == (20,35)
-    pts = det[:,1:].reshape(20,17,2)
-    if mode == 'max':
-      tl = np.min(pts,axis=1)
-      rd = np.max(pts,axis=1)
-      bbox = np.concatenate([tl,rd],axis=1)
-      assert bbox.shape == (20,4)
-    det_ = np.concatenate([bbox,det],axis=1)
-    return det_
+  # def kps_to_bbox(self, kps, mode='max'):
+  #   assert kps.shape == (20,29)
+  #   pts = det[:,1:].reshape(20,14,2)
+  #   if mode == 'max':
+  #     tl = np.min(pts,axis=1)
+  #     rd = np.max(pts,axis=1)
+  #     bbox = np.concatenate([tl,rd],axis=1)
+  #     assert bbox.shape == (20,4)
+  #   det_ = np.concatenate([bbox,det],axis=1)
+  #   return det_
 
 
   def convert_eval_format(self, all_bboxes, MS=False):

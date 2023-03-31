@@ -20,14 +20,14 @@ class MultiPoseCrowdpose(data.Dataset):
                     dtype=np.float32)
     return bbox
 
-  def _get_border(self, border, size):
+  def _get_border(self, border, size): 
     i = 1
     while size - border // i <= border // i:
         i *= 2
     return border // i
 
   def __getitem__(self, index):
-    #import pudb;pudb.set_trace()
+    
     img_id = self.images[index]
     file_name = self.coco.loadImgs(ids=[img_id])[0]['file_name']
     
@@ -101,6 +101,8 @@ class MultiPoseCrowdpose(data.Dataset):
     hp_ind = np.zeros((self.max_objs * num_joints), dtype=np.int64)
     hp_mask = np.zeros((self.max_objs * num_joints), dtype=np.int64)
 
+    area = np.zeros((self.max_objs), dtype=np.float32)
+
     draw_gaussian = draw_msra_gaussian if self.opt.mse_loss else \
                     draw_umich_gaussian
 
@@ -143,11 +145,12 @@ class MultiPoseCrowdpose(data.Dataset):
       pts_tmp_wo_zero = pts_tmp[1:, :]
       assert len(pts_tmp_wo_zero) == valid_kps_num
       tl = np.min(pts_tmp_wo_zero,axis=0)
-      rd = np.max(pts_tmp_wo_zero,axis=0)
+      rd = np.max(pts_tmp_wo_zero,axis=0) 
       h, w = rd[1] - tl[1], rd[0] - tl[0]
       ###################################################################################################################
 
       ct_int = ct.astype(np.int32)
+      area[k] = ann['bbox'][2] * ann['bbox'][3] * (self.opt.input_res / s) / 16.0 # area of 4 stride
 
 
       if ct_int[0] >= 0 and ct_int[0] < output_res and \
@@ -189,7 +192,7 @@ class MultiPoseCrowdpose(data.Dataset):
                        pts[:, :2].reshape(num_joints * 2).tolist() + [cls_id])
     #import pudb;pudb.set_trace()
     ret = {'input': inp, 'hm': hm, 'reg_mask': reg_mask, 'ind': ind, 'wh': wh,
-           'hps': kps, 'hps_mask': kps_mask}
+           'hps': kps, 'hps_mask': kps_mask, 'area': area}
     if self.opt.dense_hp:
       dense_kps = dense_kps.reshape(num_joints * 2, output_res, output_res)
       dense_kps_mask = dense_kps_mask.reshape(

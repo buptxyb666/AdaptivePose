@@ -150,7 +150,7 @@ class OKSLoss(nn.Module):
             reduction_override (str, optional): The reduction method used to
                 override the original reduction method of the loss.
                 Defaults to None. Options are "none", "mean" and "sum".
-        """
+        """ 
         
         assert reduction_override in (None, 'none', 'mean', 'sum')
         reduction = (

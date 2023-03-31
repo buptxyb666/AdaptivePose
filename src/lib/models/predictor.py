@@ -5,7 +5,7 @@ from torch.nn import functional as F
 from flops_counter import get_model_complexity_info
 from .resample2d_package.resample2d import Resample2d
 # from .GCN_utils.gcn2 import GCN
-from .networks.DCNv2.dcn_v2 import DCN
+from .networks.DCNv2.dcn_v2 import DCN 
 
 class conv_bn_relu(nn.Module):
     def __init__(self, inp_dim, out_dim, k, stride=1, with_bn=True):
@@ -25,24 +25,29 @@ class conv_bn_relu(nn.Module):
 
 
 class Feat_sampler(nn.Module):
-    def __init__(self,head_conv,moudling=False):
+    def __init__(self,head_conv, hps_channel, moudling=False):
         super(Feat_sampler, self).__init__()
 
         self.resample = Resample2d()
         
         self.gradient_mul = 1.0
-        heads = {"face":5,"shoulder":2,
-                        "left_elbow_wrist":2,"right_elbow_wrist":2,
-                        "hip":2,
-                        "left_knee_ankle":2,
-                        "right_knee_ankle":2}
-        
-        # heads = {"shoulder":2,
-        #                 "left_elbow_wrist":2,"right_elbow_wrist":2,
-        #                 "hip":2,
-        #                 "left_knee_ankle":2,
-        #                 "right_knee_ankle":2,
-        #                 "head":2} # the partitions on crowdpose
+        self.hps_channel = hps_channel
+        if self.hps_channel == 34:
+            heads = {"face":5,"shoulder":2,
+                            "left_elbow_wrist":2,"right_elbow_wrist":2,
+                            "hip":2,
+                            "left_knee_ankle":2,
+                            "right_knee_ankle":2}  # COCO
+
+        elif self.hps_channel == 28:
+            heads = {"shoulder":2,
+                            "left_elbow_wrist":2,"right_elbow_wrist":2,
+                            "hip":2,
+                            "left_knee_ankle":2,
+                            "right_knee_ankle":2,
+                            "head":2} # the partitions on crowdpose
+        else:
+            assert 'unsupport'
 
         self.heads = collections.OrderedDict(heads)
         
@@ -97,20 +102,22 @@ class Feat_sampler(nn.Module):
    
 
     def post_process(self,res_dict):
-        final_result = [res_dict["face"],res_dict["shoulder"],
-                        res_dict["left_elbow_wrist"][:,:2,:,:],res_dict["right_elbow_wrist"][:,:2,:,:],
-                        res_dict["left_elbow_wrist"][:,2:,:,:],res_dict["right_elbow_wrist"][:,2:,:,:],
-                        res_dict["hip"],
-                        res_dict["left_knee_ankle"][:,:2,:,:],res_dict["right_knee_ankle"][:,:2,:,:],
-                        res_dict["left_knee_ankle"][:,2:,:,:],res_dict["right_knee_ankle"][:,2:,:,:]]
+        if self.hps_channel == 34:
+            final_result = [res_dict["face"],res_dict["shoulder"],
+                            res_dict["left_elbow_wrist"][:,:2,:,:],res_dict["right_elbow_wrist"][:,:2,:,:],
+                            res_dict["left_elbow_wrist"][:,2:,:,:],res_dict["right_elbow_wrist"][:,2:,:,:],
+                            res_dict["hip"],
+                            res_dict["left_knee_ankle"][:,:2,:,:],res_dict["right_knee_ankle"][:,:2,:,:],
+                            res_dict["left_knee_ankle"][:,2:,:,:],res_dict["right_knee_ankle"][:,2:,:,:]]
 
-        # final_result = [res_dict["shoulder"],
-        #                 res_dict["left_elbow_wrist"][:,:2,:,:],res_dict["right_elbow_wrist"][:,:2,:,:],
-        #                 res_dict["left_elbow_wrist"][:,2:,:,:],res_dict["right_elbow_wrist"][:,2:,:,:],
-        #                 res_dict["hip"],
-        #                 res_dict["left_knee_ankle"][:,:2,:,:],res_dict["right_knee_ankle"][:,:2,:,:],
-        #                 res_dict["left_knee_ankle"][:,2:,:,:],res_dict["right_knee_ankle"][:,2:,:,:],
-        #                 res_dict["head"]] # the partitions on crowdpose
+        elif self.hps_channel == 28:
+            final_result = [res_dict["shoulder"],
+                            res_dict["left_elbow_wrist"][:,:2,:,:],res_dict["right_elbow_wrist"][:,:2,:,:],
+                            res_dict["left_elbow_wrist"][:,2:,:,:],res_dict["right_elbow_wrist"][:,2:,:,:],
+                            res_dict["hip"],
+                            res_dict["left_knee_ankle"][:,:2,:,:],res_dict["right_knee_ankle"][:,:2,:,:],
+                            res_dict["left_knee_ankle"][:,2:,:,:],res_dict["right_knee_ankle"][:,2:,:,:],
+                            res_dict["head"]] # the partitions on crowdpose
         
         final_result = torch.cat(final_result, dim=1)
         return final_result
