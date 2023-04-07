@@ -1,4 +1,4 @@
-# AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression
+# AdaptivePose
 The current code can reproduce the results reported in AdaptivePose++.
 
 👏👏👏👏👏👏👏👏👏👏👏a compact and powerful single-stage multi-person pose estimation framework:
