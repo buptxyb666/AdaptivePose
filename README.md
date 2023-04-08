@@ -1,5 +1,5 @@
 # AdaptivePose
-The current code can reproduce the results reported in AdaptivePose++.
+The current code can achieve the better performance than the results reported in papers.
 
 👏👏👏👏👏👏👏👏👏👏👏a compact and powerful single-stage multi-person pose estimation framework:
 ![](readme/framework.jpg)
