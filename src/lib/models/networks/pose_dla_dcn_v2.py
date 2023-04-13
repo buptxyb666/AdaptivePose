@@ -470,10 +470,9 @@ class DLASeg(nn.Module):
         
         backbone = nn.ModuleList([self.base,self.dla_up,self.ida_up])
         params_num = sum(p.numel() for p in backbone.parameters() if p.requires_grad)
-        print('backbone_Params: %.2fM' % (params_num / 1e6))
-        
-        self.heads = heads
     
+        self.heads = heads
+
         for head in self.heads:
             classes = self.heads[head]
             if head_conv > 0:
@@ -524,8 +523,8 @@ class DLASeg(nn.Module):
                 fill_fc_weights(fc)
             
             self.__setattr__(head, fc)
-            
-        self.sampler = Feat_sampler(head_conv)
+        
+        self.sampler = Feat_sampler(head_conv, self.heads['hps']) 
         params_num = sum(p.numel() for p in self.sampler.parameters() if p.requires_grad)
         print('sampler_Params: %.2fM' % (params_num / 1e6))
         fill_kps_weights(self.sampler)

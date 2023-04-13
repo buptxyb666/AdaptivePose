@@ -36,13 +36,13 @@ Multi-person pose estimation generally follows top-down and bottom-up paradigms.
 The time is calculated on a single Tesla V100,  which is more faster than the speed reported in paper.
 We found that stacking more 3*3 conv-relu in each brach can further improve the performance
 
-<!-- | Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  |time/ms|
+| Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  |time/ms|
 |--------------|---------|-----------|--------------|-------------------|   ---    | --- |
 |DLA-34        |   512   |   65.8    |   66.2       | 68.8    | [model](https://drive.google.com/file/d/110MSVGZWYF8clzWPW_5zgW47BzI7w-2M/view?usp=sharing)  | 33| 
 |HRNet-W32        |   512   |   68.0    |   68.5       | 69.7    | [model](https://drive.google.com/file/d/157y1W7-a5k1G-DnwtIz1aVmlcldH3IKp/view?usp=share_link) |46 | 
 |DLA-34        |   640   |    67.2   |     67.7     | 69.3        |  [model](https://drive.google.com/file/d/1F1riIzzaeh_gh7ASOfaNPnvB3m5lM_-o/view?usp=sharing)| 45 |
 |HRNet-W48     |   640   |    70.5   |     71.0     |  72.6 |   [model](https://drive.google.com/file/d/1pLg8B1ut4VS7HnjzLadfm0tJIa2IxzMR/view?usp=sharing)  | 57 |
-|HRNet-W48     |   800   |    70.8   |     71.5     |        72.5    | [model](https://drive.google.com/file/d/1Z8WrO9k3gRX48goRSegaav8mSrTjjz64/view?usp=sharing)|  87 | -->
+|HRNet-W48     |   800   |    70.8   |     71.5     |        72.5    | [model](https://drive.google.com/file/d/1Z8WrO9k3gRX48goRSegaav8mSrTjjz64/view?usp=sharing)|  87 |
 
 We employ the OKS loss for regression head and achieve the better performance without Inference overhead. Outperforming all bottom-up and single-stage methods with faster speed !!! 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 
@@ -58,7 +58,11 @@ We employ the OKS loss for regression head and achieve the better performance wi
 | Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  |time/ms|
 |--------------|---------|-----------|--------------|-------------------|   ---    | --- |
 |HRNet-W32        |   512   |   67.5    |   68.0       | 69.3    | [model](https://drive.google.com/file/d/14LQupokqqi-kgRQeh2vU6Fa82iujcKQs/view?usp=share_link) |46 | 
+<<<<<<< HEAD
 |HRNet-W48     |   640   |    70.4   |     71.5     |  72.6 |   [model](https://drive.google.com/file/d/1Wv20VnH_ngPqeYGBcDG6qy_uU6w6t0wc/view?usp=share_link)  | 57 |
+=======
+|HRNet-W48     |   640   |    70.4   |     71.0     |  72.6 |   [model](https://drive.google.com/file/d/1Wv20VnH_ngPqeYGBcDG6qy_uU6w6t0wc/view?usp=share_link)  | 57 |
+>>>>>>> ff401bc2ecfecb595a85735c791984efab1d43c3
 
 
 

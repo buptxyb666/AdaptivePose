@@ -363,9 +363,9 @@ class PoseHighResolutionNet(nn.Module):
         #     else:
         #         self.fill_fc_weights(fc)
 
-          self.__setattr__(head, fc)
+          self.__setattr__(head, fc) 
 
-        self.sampler = Feat_sampler(head_conv)
+        self.sampler = Feat_sampler(head_conv, self.heads['hps'])
         self.fill_kps_weights(self.sampler)
 
         self.pretrained_layers = extra['PRETRAINED_LAYERS']
