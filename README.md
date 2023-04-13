@@ -1,5 +1,5 @@
-# AdaptivePose++: A Powerful Single-Stage Network for Multi-Person Pose Regression
-The current code can reproduce the results reported in AdaptivePose++.
+# AdaptivePose
+The current code can achieve the better performance than the results reported in papers.
 
 👏👏👏👏👏👏👏👏👏👏👏a compact and powerful single-stage multi-person pose estimation framework:
 ![](readme/framework.jpg)
@@ -11,9 +11,7 @@ The current code can reproduce the results reported in AdaptivePose++.
 
 <!-- Contact: [xiaoyabo@bupt.edu.cn](mailto:xiaoyabo@bupt.edu.cn). Any questions or discussions about pose estiamtion task are welcomed!  -->
 
-## Abstract 
 
-Multi-person pose estimation generally follows top-down and bottom-up paradigms. Both of them use an extra stage (e.g., human detection in top-down paradigm or grouping process in bottom-up paradigm) to build the relationship between the human instance and corresponding keypoints, thus leading to the high computation cost and redundant two-stage pipeline. To address the above issue, we propose to represent the human parts as adaptive points and introduce a fine-grained body representation method. The fine-grained body representation is able to granularity encode the diverse pose information and effectively model the relationship between the human instance and corresponding keypoints in a single-forward pass. With the proposed body representation, we further deliver a compact single-stage multi-person pose regression network, termed as AdaptivePose. During inference, our proposed network only needs a single-step decode operation to form the multi-person pose without complex post-processes and refinements. We employ AdaptivePose for both 2D/3D multi-person pose estimation tasks to verify the effectiveness of AdaptivePose. Without any bells and whistles, we achieve the most competitive performance on MS COCO and CrowdPose in terms of accuracy and speed. Furthermore, the outstanding performance on MuCo-3DHP and MuPoTS-3D further demonstrates the effectiveness and generalizability on 3D scenes.
 
 ## Highlights
 
@@ -36,13 +34,7 @@ Multi-person pose estimation generally follows top-down and bottom-up paradigms.
 The time is calculated on a single Tesla V100,  which is more faster than the speed reported in paper.
 We found that stacking more 3*3 conv-relu in each brach can further improve the performance
 
-| Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  |time/ms|
-|--------------|---------|-----------|--------------|-------------------|   ---    | --- |
-|DLA-34        |   512   |   65.8    |   66.2       | 68.8    | [model](https://drive.google.com/file/d/110MSVGZWYF8clzWPW_5zgW47BzI7w-2M/view?usp=sharing)  | 33| 
-|HRNet-W32        |   512   |   68.0    |   68.5       | 69.7    | [model](https://drive.google.com/file/d/157y1W7-a5k1G-DnwtIz1aVmlcldH3IKp/view?usp=share_link) |46 | 
-|DLA-34        |   640   |    67.2   |     67.7     | 69.3        |  [model](https://drive.google.com/file/d/1F1riIzzaeh_gh7ASOfaNPnvB3m5lM_-o/view?usp=sharing)| 45 |
-|HRNet-W48     |   640   |    70.5   |     71.0     |  72.6 |   [model](https://drive.google.com/file/d/1pLg8B1ut4VS7HnjzLadfm0tJIa2IxzMR/view?usp=sharing)  | 57 |
-|HRNet-W48     |   800   |    70.8   |     71.5     |        72.5    | [model](https://drive.google.com/file/d/1Z8WrO9k3gRX48goRSegaav8mSrTjjz64/view?usp=sharing)|  87 |
+
 
 We employ the OKS loss for regression head and achieve the better performance without Inference overhead. Outperforming all bottom-up and single-stage methods with faster speed !!! 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 
