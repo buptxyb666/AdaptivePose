@@ -32,11 +32,11 @@ The current code can achieve the better performance than the results reported in
 ### The single-stage multi-person pose estimation on COCO validation
 <!-- - **Speed** Please refer to the paper(https://arxiv.org/abs/2112.13635) for inference time 🚀🚀🚀. The performance is slightly better than the reported in paper. -->
 The time is calculated on a single Tesla V100,  which is more faster than the speed reported in paper.
-We found that stacking more 3*3 conv-relu in each brach can further improve the performance
+<!-- We found that stacking more 3*3 conv-relu in each brach can further improve the performance
 
 
 
-We employ the OKS loss for regression head and achieve the better performance without Inference overhead. Outperforming all bottom-up and single-stage methods with faster speed !!! 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
+We employ the OKS loss for regression head and achieve the better performance without Inference overhead. Outperforming all bottom-up and single-stage methods with faster speed !!! 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 -->
 
 | Backbone     | inp_res |  AP       | Flip AP      |  Multi-scale AP.  |   download  |time/ms|
 |--------------|---------|-----------|--------------|-------------------|   ---    | --- |
