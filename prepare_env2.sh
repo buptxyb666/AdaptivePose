@@ -1,15 +1,15 @@
-pip3 install -i https://pypi.douban.com/simple/ numpy
-pip3 install -i https://pypi.douban.com/simple/ torch==1.2.0
-pip3 install -i https://pypi.douban.com/simple/ torchvision==0.4.0
-pip3 install -i https://pypi.douban.com/simple/ opencv-python
-pip3 install -i https://pypi.douban.com/simple/ Cython
-pip3 install -i https://pypi.douban.com/simple/ numba
-pip3 install -i https://pypi.douban.com/simple/ progress
-pip3 install -i https://pypi.douban.com/simple/ matplotlib
-pip3 install -i https://pypi.douban.com/simple/ easydict
-pip3 install -i https://pypi.douban.com/simple/ scipy
-pip3 install -i https://pypi.douban.com/simple/ pillow==6.2.1
-pip3 install -i https://pypi.douban.com/simple/ scikit-image
+pip3 install numpy
+pip3 install torch
+pip3 install torchvision
+pip3 install opencv-python
+pip3 install Cython
+pip3 install numba
+pip3 install progress
+pip3 install matplotlib
+pip3 install easydict
+pip3 install scipy
+pip3 install pillow==6.2.1
+pip3 install scikit-image
 
 
 THIS_DIR="$( cd "$( dirname "$0"  )" && pwd  )"

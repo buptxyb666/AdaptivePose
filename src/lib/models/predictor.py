@@ -3,7 +3,7 @@ import torch.nn as nn
 import collections
 from torch.nn import functional as F
 from flops_counter import get_model_complexity_info
-from .resample2d_package.resample2d import Resample2d
+#from .resample2d_package.resample2d import Resample2d
 # from .GCN_utils.gcn2 import GCN
 from .networks.DCNv2.dcn_v2 import DCN 
 
@@ -28,7 +28,7 @@ class Feat_sampler(nn.Module):
     def __init__(self,head_conv, hps_channel, moudling=False):
         super(Feat_sampler, self).__init__()
 
-        self.resample = Resample2d()
+        #self.resample = Resample2d()
         
         self.gradient_mul = 1.0
         self.hps_channel = hps_channel
@@ -62,7 +62,7 @@ class Feat_sampler(nn.Module):
         feat_agg = []
         for m in range(len(self.heads)):
             feat_trans.append(conv_bn_relu(head_conv, inp_dim, 1 ,with_bn= True))
-            feat_agg.append(DCN(inp_dim, inp_dim, kernel_size=(3,3), stride=1, padding=1, dilation=1, deformable_groups=1))
+            feat_agg.append(DCN(inp_dim, inp_dim, kernel_size=3, stride=1, padding=1, dilation=1, deformable_groups=1))
         self.feat_trans = nn.ModuleList(feat_trans)
         self.feat_agg = nn.ModuleList(feat_agg)
 
@@ -78,6 +78,21 @@ class Feat_sampler(nn.Module):
         self.squeeze_ct = conv_bn_relu(inp_dim * len(heads) + head_conv, inp_dim, 3 ,with_bn=False) 
         self.pred_ct_hm = nn.Conv2d(inp_dim, 1, kernel_size=1, stride=1, padding=0)
         
+    
+    def resample(self, inp, offset):
+        # import pudb;pudb.set_trace()
+        out_h, out_w = offset.shape[-2:]
+        new_h = torch.linspace(0, out_h-1, out_h).view(-1, 1).repeat(1, out_w)
+        new_w = torch.linspace(0, out_w-1, out_w).repeat(out_h, 1)
+        base_grid = torch.cat((new_w.unsqueeze(2), new_h.unsqueeze(2)), dim = 2).unsqueeze(0) # xy
+        grid = offset.permute(0, 2, 3, 1) + base_grid.to(offset.device)  # unnormal
+        grid[:,:,:,0] = grid[:,:,:,0]/(out_w-1) * 2 - 1
+        grid[:,:,:,1] = grid[:,:,:,1]/(out_h-1) * 2 - 1  # normal to [-1, 1]
+
+        out = F.grid_sample(inp, grid=grid, mode='bilinear', padding_mode='border')
+
+        return out
+    
     
     def feat_sampler(self, kps_feat, ct_feat, offset1):
         
