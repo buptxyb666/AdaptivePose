@@ -1,4 +1,6 @@
 # AdaptivePose
+In new_ops branch, we reimplement the DCNv2 and Warp operations, the two OPs no longer require annotations.
+
 The current code can achieve the better performance than the results reported in papers.
 
 👏👏👏👏👏👏👏👏👏👏👏a compact and powerful single-stage multi-person pose estimation framework:
@@ -59,16 +61,9 @@ We employ the OKS loss for regression head and achieve the better performance wi
 All models and details will be available in our [Model zoo](readme/MODEL_ZOO.md). -->
 
 ## Prepare env
-The conda environment torch12 can be downloaded directly from [torch12.tar.gz](https://drive.google.com/file/d/1hAtuIbLHlKpt2YN_zUxkqHtUhDvsNn4u/view?usp=sharing).
-The path should like this AdaptivePose/torch12.tar.gz
-and then following
+You can deploy the environment following
 ```
 source prepare_env.sh
-```
-
-In another way, you also can deploy the environment following
-```
-source prepare_env2.sh
 ```
 
 ## Prepare Data and pretrain models
