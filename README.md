@@ -1,5 +1,5 @@
 # AdaptivePose
-In new_ops branch, we reimplement the DCNv2 and Warp operations, the two OPs no longer require annotations.
+In new_ops branch, we reimplement the DCNv2 and Warp operations, the two OPs no longer require compilations.
 
 The current code can achieve the better performance than the results reported in papers.
 
