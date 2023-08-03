@@ -1,5 +1,6 @@
 # AdaptivePose
-new_ops branch can support all pytorch version
+new_ops branch can support all pytorch version.
+
 The current code can achieve the better performance than the results reported in papers.
 
 👏👏👏👏👏👏👏👏👏👏👏a compact and powerful single-stage multi-person pose estimation framework:
